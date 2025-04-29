@@ -104,7 +104,7 @@ if [ "$TEST_CLUSTER" = "minikube" ]; then
         minikube addons enable registry --images="Registry=${ARCH}/registry:2.8.0-beta.1,KubeRegistryProxy=google_containers/kube-registry-proxy:0.4-${ARCH}"
         rm -rf kubernetes
     else
-        minikube addons enable registry --images="Registry=mirror.gcr.io/registry:latest"
+        minikube addons enable registry --images="Registry=${MINIKUBE_REGISTRY_IMAGE}"
     fi
 
     minikube addons enable registry-aliases
