@@ -61,13 +61,14 @@ if [ "$TEST_CLUSTER" = "minikube" ]; then
     mkdir $HOME/.kube || true
     touch $HOME/.kube/config
 
-    docker run -d -p 5000:5000 ${MINIKUBE_REGISTRY_IMAGE}
+    # TODO - It seems this is no needed at all :O
+#    docker run -d -p 127.0.0.1:5000:5000 ${MINIKUBE_REGISTRY_IMAGE}
 
     export KUBECONFIG=$HOME/.kube/config
     # We can turn on network polices support by adding the following options --network-plugin=cni --cni=calico
     # We have to allow trafic for ITS when NPs are turned on
     # We can allow NP after Strimzi#4092 which should fix some issues on STs side
-    minikube start --vm-driver=docker --kubernetes-version=${KUBE_VERSION} \
+    minikube start --driver=docker --kubernetes-version=${KUBE_VERSION} \
       --insecure-registry=localhost:5000 --extra-config=apiserver.authorization-mode=Node,RBAC \
       --cpus=${MINIKUBE_CPU} --memory=${MINIKUBE_MEMORY} --force
 
@@ -107,7 +108,7 @@ if [ "$TEST_CLUSTER" = "minikube" ]; then
         minikube addons enable registry --images="Registry=${MINIKUBE_REGISTRY_IMAGE}"
     fi
 
-    minikube addons enable registry-aliases
+#    minikube addons enable registry-aliases
 
     kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
 else
