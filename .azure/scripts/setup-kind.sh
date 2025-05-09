@@ -395,7 +395,7 @@ if [[ "$IP_FAMILY" = "ipv4" || "$IP_FAMILY" = "dual" ]]; then
     # run local container registry
     if [ "$($DOCKER_CMD inspect -f '{{.State.Running}}' "${reg_name}" 2>/dev/null || true)" != 'true' ]; then
         $DOCKER_CMD run \
-          -d --restart=always -p "${hostname}:${reg_port}:5000" --name "${reg_name}" --network "${network_name}" \
+          -d --restart=always -p "${reg_port}:5000" --name "${reg_name}" --network "${network_name}" \
           ${REGISTRY_IMAGE}
     fi
 
