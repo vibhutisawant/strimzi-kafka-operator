@@ -10,6 +10,7 @@ KIND_CLOUD_PROVIDER_VERSION=${KIND_CLOUD_PROVIDER_VERSION:-"v0.6.0"}
 KIND_NODE_IMAGE=${KIND_NODE_IMAGE:-"kindest/node:v1.26.15@sha256:c79602a44b4056d7e48dc20f7504350f1e87530fe953428b792def00bc1076dd"}
 COPY_DOCKER_LOGIN=${COPY_DOCKER_LOGIN:-"false"}
 DOCKER_CMD="${DOCKER_CMD:-docker}"
+REGISTRY_IMAGE=${REGISTRY_IMAGE:-"registry:2"}
 
 KIND_CLUSTER_NAME="kind-cluster"
 
@@ -393,7 +394,7 @@ if [[ "$IP_FAMILY" = "ipv4" || "$IP_FAMILY" = "dual" ]]; then
     if [ "$($DOCKER_CMD inspect -f '{{.State.Running}}' "${reg_name}" 2>/dev/null || true)" != 'true' ]; then
         $DOCKER_CMD run \
           -d --restart=always -p "${hostname}:${reg_port}:5000" --name "${reg_name}" --network "${network_name}" \
-          registry:2
+          ${REGISTRY_IMAGE}
     fi
 
     # Add the registry config to the nodes
@@ -435,7 +436,7 @@ elif [[ "$IP_FAMILY" = "ipv6" ]]; then
     if [ "$($DOCKER_CMD inspect -f '{{.State.Running}}' "${reg_name}" 2>/dev/null || true)" != 'true' ]; then
         $DOCKER_CMD run \
           -d --restart=always -p "[${ula_fixed_ipv6}::1]:${reg_port}:5000" --name "${reg_name}" --network "${network_name}" \
-          registry:2
+          ${REGISTRY_IMAGE}
     fi
     # we need to also make a DNS record for docker tag because it seems that such version does not support []:: format
     echo "${ula_fixed_ipv6}::1    ${registry_dns}" >> /etc/hosts
