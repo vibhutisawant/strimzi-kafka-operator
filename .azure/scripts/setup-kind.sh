@@ -376,6 +376,8 @@ configure_network "${network_name}"
 
 if [[ "$IP_FAMILY" = "ipv4" || "$IP_FAMILY" = "dual" ]]; then
     hostname=$(hostname --ip-address | grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' | awk '$1 != "127.0.0.1" { print $1 }' | head -1)
+    # TODO - revert
+    hostname=localhost
 
     # update insecure registries
     # TODO - revert or remove after testing
