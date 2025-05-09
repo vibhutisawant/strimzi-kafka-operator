@@ -148,7 +148,7 @@ jobs:
       - name: Install Kind
         uses: ./.github/actions/setup-kind
         with:
-          architecture: arm64
+          architecture: ${{ matrix.config.arch }}
 
       - name: Set default environment variables
         uses: ./.github/actions/set-defaults
