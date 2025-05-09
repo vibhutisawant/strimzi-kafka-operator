@@ -363,7 +363,7 @@ adjust_inotify_limits
 load_iptables_modules_for_podman
 
 reg_name='kind-registry'
-reg_port='5001'
+reg_port='5000'
 network_name="kind"
 # by default using podman we have to use single control-plane because of https://github.com/kubernetes-sigs/kind/issues/2858
 control_planes=1
