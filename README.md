@@ -9,6 +9,10 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/strimziio?style=social)](https://twitter.com/strimziio)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/strimzi-kafka-operator)](https://artifacthub.io/packages/search?repo=strimzi-kafka-operator)
 
+
+[![Build Status]([https://148.100.84.211/buildStatus/icon?job=strimzi-kafka-operator%2FStrimzi_Kafka_Operator_ST](https://148.100.84.211/job/strimzi-kafka-operator/job/Strimzi_Kafka_Operator_ST/badge/icon))](https://148.100.84.211/job/strimzi-kafka-operator/job/Strimzi_Kafka_Operator_ST/)
+
+
 Strimzi provides a way to run an [Apache Kafka®][kafka] cluster on 
 [Kubernetes][k8s] or [OpenShift][os] in various deployment configurations.
 See our [website][strimzi] for more details about the project.
